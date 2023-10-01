@@ -1,3 +1,4 @@
+import 'package:cimb_technical_test/src/view/auth/login.dart';
 import 'package:cimb_technical_test/src/view/home.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Home(),
+      home: const LoginScreen(),
     );
   }
 }
