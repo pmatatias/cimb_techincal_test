@@ -18,7 +18,7 @@ abstract class PostDS {
 class PostDSImpl implements PostDS {
   final HttpBuilder httpBuilder;
 
-  PostDSImpl({required this.httpBuilder});
+  PostDSImpl(this.httpBuilder);
 
   @override
   Future<List<Post>> fetchPostList() async {
