@@ -50,27 +50,33 @@ class _LoginScreenState extends State<LoginScreen> {
                       const Text('Email',
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10.0),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFDBE2EF),
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: bxShadow,
-                        ),
-                        height: 60.0,
-                        child: TextFormField(
-                          onTapOutside: (_) => FocusScope.of(context).unfocus(),
-                          controller: _emailCtrl,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon: Icon(
-                              Icons.email,
-                              color: Colors.grey,
-                            ),
-                            hintText: 'Enter your email',
-                            // hintStyle: TextStyle(color: Colors.black),
+                      TextFormField(
+                        onTapOutside: (_) => FocusScope.of(context).unfocus(),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          final isValid =
+                              RegExp(emailRegex).hasMatch(value ?? '');
+                          if (!isValid) {
+                            return "Email not valid";
+                          }
+                          return null;
+                        },
+                        controller: _emailCtrl,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: const Color(0xFFDBE2EF),
+                          // isDense: true,
+                          // isCollapsed: true,
+                          contentPadding:
+                              const EdgeInsets.symmetric(vertical: 15),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          prefixIcon: const Icon(
+                            Icons.email,
+                            color: Colors.grey,
                           ),
+                          hintText: 'Enter your email',
                         ),
                       )
                     ],
@@ -82,38 +88,35 @@ class _LoginScreenState extends State<LoginScreen> {
                       const Text('Password',
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10.0),
-                      Container(
-                        alignment: Alignment.centerLeft,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFDBE2EF),
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: bxShadow,
-                        ),
-                        height: 60.0,
-                        child: TextFormField(
-                          onTapOutside: (_) => FocusScope.of(context).unfocus(),
-                          controller: _passwordCtrl,
-                          obscureText: _isObscure,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            prefixIcon:
-                                const Icon(Icons.lock, color: Colors.grey),
-                            suffixIconConstraints: const BoxConstraints(),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                _isObscure
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                                color: Colors.grey,
-                              ),
-                              onPressed: () {
-                                _isObscure = !_isObscure;
-                                setState(() {});
-                              },
+                      TextFormField(
+                        onTapOutside: (_) => FocusScope.of(context).unfocus(),
+                        controller: _passwordCtrl,
+                        obscureText: _isObscure,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        keyboardType: TextInputType.visiblePassword,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: const Color(0xFFDBE2EF),
+                          contentPadding:
+                              const EdgeInsets.symmetric(vertical: 15),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          prefixIcon:
+                              const Icon(Icons.lock, color: Colors.grey),
+                          suffixIconConstraints: const BoxConstraints(),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _isObscure
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.grey,
                             ),
-                            hintText: 'Enter your password',
+                            onPressed: () {
+                              _isObscure = !_isObscure;
+                              setState(() {});
+                            },
                           ),
+                          hintText: 'Enter your password',
                         ),
                       )
                     ],
