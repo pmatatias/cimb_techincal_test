@@ -13,7 +13,7 @@ class Post {
     required this.body,
   });
 
-  Post empty() => Post(userId: 0, id: 0, title: "", body: "");
+  static Post empty() => Post(userId: 0, id: 0, title: "", body: "");
 
   Post copyWith({
     int? userId,
@@ -45,4 +45,12 @@ class Post {
         "title": title,
         "body": body,
       };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Post && runtimeType == other.runtimeType && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
 }

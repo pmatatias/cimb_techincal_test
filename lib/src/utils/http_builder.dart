@@ -8,7 +8,7 @@ const baseUrl = 'https://jsonplaceholder.typicode.com';
 abstract class HttpBuilder {
   Future<http.Response> getHandler(
       {required String path, Map<String, String>? headers});
-  Future<http.Response> patchHandler(
+  Future<http.Response> putHandler(
       {required String path,
       Map<String, dynamic>? body,
       Map<String, String>? headers});
@@ -38,13 +38,13 @@ class HttpBuilderImpl implements HttpBuilder {
   }
 
   @override
-  Future<http.Response> patchHandler(
+  Future<http.Response> putHandler(
       {required String path,
       Map<String, dynamic>? body,
       Map<String, String>? headers}) async {
     final url = Uri.parse(baseUrl + path);
-
-    final resp = await http.patch(url, headers: headers, body: body);
+    print(url);
+    final resp = await http.put(url, headers: headers, body: jsonEncode(body));
     if (resp.statusCode == 200) {
       return resp;
     } else {
@@ -78,7 +78,7 @@ class HttpBuilderImpl implements HttpBuilder {
       headers: headers ?? {'content-type': 'application/json'},
       body: jsonEncode(body),
     );
-    if (resp.statusCode == 200) {
+    if (resp.statusCode == 201) {
       return resp;
     } else {
       throw ('Something went wrong with code ${resp.statusCode}\n${resp.reasonPhrase}');

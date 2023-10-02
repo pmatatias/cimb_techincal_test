@@ -21,4 +21,12 @@ class PostState extends ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
+
+  // void addNewItem() {}
+
+  // void updateItem(Post updItem) {
+  //   int idx = postList.indexOf(updItem);
+  //   postList[idx] = updItem;
+  //   notifyListeners();
+  // }
 }

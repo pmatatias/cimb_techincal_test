@@ -9,6 +9,9 @@ const usePosts = UsePostImpl(PostRepoImpl(PostDSImpl(HttpBuilderImpl())));
 abstract class UsePost {
   Future<Result<List<Post>, Exception>> getList();
   Future<Result<Post, Exception>> getDetail(int id);
+
+  Future<Result<Post, Exception>> update(Post data);
+  Future<Result<Post, Exception>> create(Post data);
 }
 
 class UsePostImpl implements UsePost {
@@ -23,5 +26,15 @@ class UsePostImpl implements UsePost {
   @override
   Future<Result<List<Post>, Exception>> getList() async {
     return await postRepo.getPostList();
+  }
+
+  @override
+  Future<Result<Post, Exception>> create(Post data) async {
+    return await postRepo.createPost(data);
+  }
+
+  @override
+  Future<Result<Post, Exception>> update(Post data) async {
+    return await postRepo.updatePost(data);
   }
 }
