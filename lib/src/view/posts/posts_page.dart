@@ -24,13 +24,20 @@ class PostsPage extends StatelessWidget {
           } else {
             return RefreshIndicator(
               onRefresh: state.initFetch,
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: state.postList.length,
-                itemBuilder: (context, index) => PostTile(
-                  data: state.postList[index],
-                ),
-              ),
+              child: state.postList.isEmpty
+                  ? const Center(
+                      child: Text(
+                        "No Item found",
+                        style: TextStyle(color: Colors.black, fontSize: 25),
+                      ),
+                    )
+                  : ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: state.postList.length,
+                      itemBuilder: (context, index) => PostTile(
+                        data: state.postList[index],
+                      ),
+                    ),
             );
           }
         }
