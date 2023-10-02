@@ -1,5 +1,6 @@
 import 'package:cimb_technical_test/src/utils/konstanta.dart';
 import 'package:cimb_technical_test/src/utils/pallete.dart';
+import 'package:cimb_technical_test/src/view/auth/widgets/button.dart';
 import 'package:cimb_technical_test/src/view/home.dart';
 import 'package:flutter/material.dart';
 
@@ -132,41 +133,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  Container(
-                    padding: const EdgeInsets.symmetric(vertical: 20.0),
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all<EdgeInsets>(
-                            const EdgeInsets.all(16)),
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.indigo),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                        ),
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Home()),
-                              (route) => false);
-                        }
-                      },
-                      child: const Text(
-                        'LOGIN',
-                        style: TextStyle(
-                            color: Colors.white,
-                            letterSpacing: 1.5,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
-                    ),
-                  ),
+                  MyButton(
+                    name: "LOGIN",
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const Home()),
+                            (route) => false);
+                      }
+                    },
+                  )
                 ],
               ),
             ),
