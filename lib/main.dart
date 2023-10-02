@@ -1,7 +1,6 @@
 import 'package:cimb_technical_test/src/view/appstate.dart';
 import 'package:cimb_technical_test/src/view/auth/login.dart';
 import 'package:cimb_technical_test/src/view/favorites/fav_state.dart';
-import 'package:cimb_technical_test/src/view/home.dart';
 import 'package:cimb_technical_test/src/view/posts/post_state.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +33,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
           useMaterial3: true,
         ),
-        home: const Home(),
+        home: const LoginScreen(),
       ),
     );
   }
