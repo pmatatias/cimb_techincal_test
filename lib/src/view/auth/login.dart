@@ -1,4 +1,6 @@
 import 'package:cimb_technical_test/src/utils/konstanta.dart';
+import 'package:cimb_technical_test/src/utils/pallete.dart';
+import 'package:cimb_technical_test/src/view/home.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -17,7 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.indigo.shade100,
+      backgroundColor: Palette.cPurple,
       body: Center(
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
@@ -55,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         validator: (value) {
                           final isValid =
-                              RegExp(emailRegex).hasMatch(value ?? '');
+                              RegExp(emailPattern).hasMatch(value ?? '');
                           if (!isValid) {
                             return "Email not valid";
                           }
@@ -65,9 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         keyboardType: TextInputType.emailAddress,
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: const Color(0xFFDBE2EF),
-                          // isDense: true,
-                          // isCollapsed: true,
+                          fillColor: Palette.fillColor,
                           contentPadding:
                               const EdgeInsets.symmetric(vertical: 15),
                           border: OutlineInputBorder(
@@ -92,11 +92,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         onTapOutside: (_) => FocusScope.of(context).unfocus(),
                         controller: _passwordCtrl,
                         obscureText: _isObscure,
+                        validator: (value) {
+                          final isValid =
+                              RegExp(passwordPattern).hasMatch(value ?? '');
+
+                          if (!isValid) {
+                            return "Password must contain uppercase, lowercase, number and special character";
+                          }
+                          return null;
+                        },
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                         keyboardType: TextInputType.visiblePassword,
                         decoration: InputDecoration(
                           filled: true,
-                          fillColor: const Color(0xFFDBE2EF),
+                          errorMaxLines: 2,
+                          fillColor: Palette.fillColor,
                           contentPadding:
                               const EdgeInsets.symmetric(vertical: 15),
                           border: OutlineInputBorder(
@@ -138,7 +148,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Home()),
+                              (route) => false);
+                        }
+                      },
                       child: const Text(
                         'LOGIN',
                         style: TextStyle(
