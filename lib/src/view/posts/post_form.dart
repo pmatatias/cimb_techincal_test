@@ -42,6 +42,7 @@ class _PostFormScreenState extends State<PostFormScreen> {
           TextButton.icon(
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
+                  showLoaderDialogLoading(context);
                   final posState = context.read<PostState>();
                   if (widget.isEdit) {
                     final lastda = widget.data
@@ -75,6 +76,10 @@ class _PostFormScreenState extends State<PostFormScreen> {
                     },
                         (error) => showMessenger(context, error.toString(),
                             bgColor: Palette.cRed));
+                  }
+                  //dismiss loader
+                  if (mounted) {
+                    Navigator.pop(context);
                   }
                 }
               },
