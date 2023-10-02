@@ -18,11 +18,11 @@ abstract class PostDS {
 class PostDSImpl implements PostDS {
   final HttpBuilder httpBuilder;
 
-  PostDSImpl(this.httpBuilder);
+  const PostDSImpl(this.httpBuilder);
 
   @override
   Future<List<Post>> fetchPostList() async {
-    final response = await httpBuilder.getHandler(path: '/post');
+    final response = await httpBuilder.getHandler(path: '/posts');
     return (jsonDecode(response.body) as List)
         .map((e) => Post.fromJson(e))
         .toList();
@@ -30,7 +30,7 @@ class PostDSImpl implements PostDS {
 
   @override
   Future<Post> fetchPostDetail(int id) async {
-    final response = await httpBuilder.getHandler(path: '/post/$id');
+    final response = await httpBuilder.getHandler(path: '/posts/$id');
     return Post.fromJson(jsonDecode(response.body));
   }
 }

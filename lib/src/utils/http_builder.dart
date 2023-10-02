@@ -27,6 +27,8 @@ class HttpBuilderImpl implements HttpBuilder {
   Future<http.Response> getHandler(
       {required String path, Map<String, String>? headers}) async {
     final url = Uri.parse(baseUrl + path);
+
+    print(url);
     final resp = await http.get(url, headers: headers);
     if (resp.statusCode == 200) {
       return resp;

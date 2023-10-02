@@ -10,7 +10,7 @@ abstract class PostRepo {
 class PostRepoImpl implements PostRepo {
   final PostDS postDS;
 
-  PostRepoImpl(this.postDS);
+  const PostRepoImpl(this.postDS);
 
   @override
   Future<Result<Post, Exception>> getPostDetail(int id) async {

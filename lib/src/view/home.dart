@@ -23,8 +23,11 @@ class _HomeState extends State<Home> {
     final appState = context.watch<AppState>();
     return Scaffold(
       appBar: AppBar(
-        title: Text(appState.title),
-        backgroundColor: Palette.cBgColor,
+        title: Text(
+          appState.title,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Palette.cPurple,
       ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: appState.activePage,
@@ -41,6 +44,18 @@ class _HomeState extends State<Home> {
       body: switch (appState.activePage) {
         0 => const PostsPage(),
         _ => const Page404(),
+      },
+      floatingActionButton: switch (appState.activePage) {
+        0 => FloatingActionButton(
+            backgroundColor: Palette.cGreen,
+            shape: const CircleBorder(),
+            onPressed: () {},
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
+          ),
+        _ => null,
       },
     );
   }
