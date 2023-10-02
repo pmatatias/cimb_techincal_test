@@ -1,6 +1,6 @@
 import 'package:cimb_technical_test/src/utils/pallete.dart';
 import 'package:cimb_technical_test/src/view/posts/post_state.dart';
-import 'package:cimb_technical_test/src/view/posts/widgets/post_tile.dart';
+import 'package:cimb_technical_test/src/view/shared_widgets/post_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,5 +1,6 @@
 import 'package:cimb_technical_test/src/utils/pallete.dart';
 import 'package:cimb_technical_test/src/view/appstate.dart';
+import 'package:cimb_technical_test/src/view/favorites/fav_state.dart';
 import 'package:cimb_technical_test/src/view/favorites/favorite_post_page.dart';
 import 'package:cimb_technical_test/src/view/page_404.dart';
 import 'package:cimb_technical_test/src/view/posts/posts_page.dart';
@@ -14,13 +15,19 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<BottomNavigationBarItem> nav = [
-    const BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: "Posts"),
-    const BottomNavigationBarItem(
-        icon: Icon(Icons.favorite), label: "Favorites"),
-  ];
   @override
   Widget build(BuildContext context) {
+    List<BottomNavigationBarItem> nav = [
+      const BottomNavigationBarItem(
+          icon: Icon(Icons.newspaper), label: "Posts"),
+      BottomNavigationBarItem(
+          icon: Badge(
+              label: Consumer<FavState>(builder: (context, fvState, _) {
+                return Text(fvState.favPost.length.toString());
+              }),
+              child: const Icon(Icons.favorite)),
+          label: "Favorites"),
+    ];
     final appState = context.watch<AppState>();
     return Scaffold(
       appBar: AppBar(
