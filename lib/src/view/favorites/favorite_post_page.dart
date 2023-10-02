@@ -15,25 +15,26 @@ class _FavoritePostPageState extends State<FavoritePostPage> {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<FavState>();
-    return ListView.builder(
-      itemCount: state.favPost.length,
-      itemBuilder: (context, index) {
-        if (state.favPost.isEmpty) {
-          return const Center(
-            child: Text("No Item found"),
-          );
-        }
-        return Dismissible(
-          key: ValueKey(state.favPost[index].id),
-          background: const BGDissmissible(),
-          direction: DismissDirection.endToStart,
-          onDismissed: (direction) => state.removeFav(state.favPost[index]),
-          child: PostTile(
-            data: state.favPost[index],
-            showTrailing: false,
-          ),
-        );
-      },
-    );
+    return state.favPost.isEmpty
+        ? const Center(
+            child: Text(
+              "No Item found",
+              style: TextStyle(color: Colors.black, fontSize: 25),
+            ),
+          )
+        : ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            itemCount: state.favPost.length,
+            itemBuilder: (context, index) => Dismissible(
+                  key: ValueKey(state.favPost[index].id),
+                  background: const BGDissmissible(),
+                  direction: DismissDirection.endToStart,
+                  onDismissed: (direction) =>
+                      state.removeFav(state.favPost[index]),
+                  child: PostTile(
+                    data: state.favPost[index],
+                    showTrailing: false,
+                  ),
+                ));
   }
 }
