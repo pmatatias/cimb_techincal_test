@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class PostTile extends StatelessWidget {
-  const PostTile({super.key, required this.data});
+  const PostTile({super.key, required this.data, this.showTrailing = true});
   final Post data;
+  final bool showTrailing;
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +31,16 @@ class PostTile extends StatelessWidget {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
-        trailing: IconButton(
-            color: isFav ? Palette.cRed : Colors.grey,
-            onPressed: isFav
-                ? () => context.read<FavState>().removeFav(data)
-                : () => context.read<FavState>().addFav(data),
-            icon: const Icon(
-              Icons.favorite,
-            )),
+        trailing: showTrailing
+            ? IconButton(
+                color: isFav ? Palette.cRed : Colors.grey,
+                onPressed: isFav
+                    ? () => context.read<FavState>().removeFav(data)
+                    : () => context.read<FavState>().addFav(data),
+                icon: const Icon(
+                  Icons.favorite,
+                ))
+            : null,
       ),
     );
   }

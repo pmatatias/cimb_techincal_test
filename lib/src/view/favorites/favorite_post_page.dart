@@ -1,4 +1,7 @@
+import 'package:cimb_technical_test/src/view/favorites/fav_state.dart';
+import 'package:cimb_technical_test/src/view/posts/widgets/post_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class FavoritePostPage extends StatefulWidget {
   const FavoritePostPage({super.key});
@@ -10,6 +13,21 @@ class FavoritePostPage extends StatefulWidget {
 class _FavoritePostPageState extends State<FavoritePostPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final state = context.watch<FavState>();
+    return ListView.builder(
+      itemCount: state.favPost.length,
+      itemBuilder: (context, index) {
+        if (state.favPost.isEmpty) {
+          return const Center(
+            child: Text("No Item found"),
+          );
+        }
+
+        return PostTile(
+          data: state.favPost[index],
+          showTrailing: false,
+        );
+      },
+    );
   }
 }

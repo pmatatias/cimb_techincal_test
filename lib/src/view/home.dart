@@ -1,5 +1,6 @@
 import 'package:cimb_technical_test/src/utils/pallete.dart';
 import 'package:cimb_technical_test/src/view/appstate.dart';
+import 'package:cimb_technical_test/src/view/favorites/favorite_post_page.dart';
 import 'package:cimb_technical_test/src/view/page_404.dart';
 import 'package:cimb_technical_test/src/view/posts/posts_page.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,7 @@ class _HomeState extends State<Home> {
           items: nav),
       body: switch (appState.activePage) {
         0 => const PostsPage(),
+        1 => const FavoritePostPage(),
         _ => const Page404(),
       },
       floatingActionButton: switch (appState.activePage) {
