@@ -1,6 +1,7 @@
 import 'package:cimb_technical_test/src/domain/model.dart';
 import 'package:cimb_technical_test/src/utils/pallete.dart';
 import 'package:cimb_technical_test/src/view/favorites/fav_state.dart';
+import 'package:cimb_technical_test/src/view/posts/post_form.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,14 @@ class PostTile extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       color: Palette.fillColor,
       child: ListTile(
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PostFormScreen(
+                data: data,
+                isEdit: true,
+              ),
+            )),
         title: Text(
           data.title,
           maxLines: 1,

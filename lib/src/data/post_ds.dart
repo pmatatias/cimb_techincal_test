@@ -11,7 +11,11 @@ abstract class PostDS {
   Future<Post> fetchPostDetail(int id);
 
   /// update Post
-  /// delete post
+  Future<Post> updatePost(Post data);
+
+  /// Create post
+  Future<Post> createPost(Post data);
+
   /// etc
 }
 
@@ -31,6 +35,26 @@ class PostDSImpl implements PostDS {
   @override
   Future<Post> fetchPostDetail(int id) async {
     final response = await httpBuilder.getHandler(path: '/posts/$id');
+    return Post.fromJson(jsonDecode(response.body));
+  }
+
+  @override
+  Future<Post> createPost(Post data) async {
+    final response =
+        await httpBuilder.postHandler(body: data.toJson(), path: '/posts');
+    return Post.fromJson(jsonDecode(response.body));
+  }
+
+  @override
+  Future<Post> updatePost(Post data) async {
+    final response = await httpBuilder.putHandler(
+      path: '/posts/${data.id}',
+      body: data.toJson(),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    );
+
     return Post.fromJson(jsonDecode(response.body));
   }
 }

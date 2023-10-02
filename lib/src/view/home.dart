@@ -1,8 +1,10 @@
+import 'package:cimb_technical_test/src/domain/model.dart';
 import 'package:cimb_technical_test/src/utils/pallete.dart';
 import 'package:cimb_technical_test/src/view/appstate.dart';
 import 'package:cimb_technical_test/src/view/favorites/fav_state.dart';
 import 'package:cimb_technical_test/src/view/favorites/favorite_post_page.dart';
 import 'package:cimb_technical_test/src/view/page_404.dart';
+import 'package:cimb_technical_test/src/view/posts/post_form.dart';
 import 'package:cimb_technical_test/src/view/posts/posts_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -58,7 +60,11 @@ class _HomeState extends State<Home> {
         0 => FloatingActionButton(
             backgroundColor: Palette.cGreen,
             shape: const CircleBorder(),
-            onPressed: () {},
+            onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PostFormScreen(data: Post.empty()),
+                )),
             child: const Icon(
               Icons.add,
               color: Colors.white,
